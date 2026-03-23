@@ -700,7 +700,7 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState } = React;
+        const { useState, useEffect } = React;
 
         // Navbar Component
         function Navbar() {
@@ -827,12 +827,10 @@
 
                 // Check if emailjs is loaded
                 if (!window.emailjs) {
-                    alert('Email service is not loaded. Please refresh the page and try again.');
+                    alert('Email service is loading. Please wait a moment and try again.');
                     setSending(false);
                     return;
                 }
-
-                window.emailjs.init('FOglBeof19V01eIHg');
 
                 const templateParams = {
                     title: 'New Contact Form Submission',
@@ -848,7 +846,7 @@
                         setSending(false);
                     })
                     .catch((error) => {
-                        alert('Failed to send message. Error: ' + error.text);
+                        alert('Failed to send message. Error: ' + (error.text || error.message));
                         console.error('EmailJS error:', error);
                         setSending(false);
                     });
@@ -953,6 +951,20 @@
 
         // Main App Component
         function App() {
+            useEffect(() => {
+                // Initialize EmailJS when the app loads
+                const initEmailJS = () => {
+                    if (window.emailjs) {
+                        window.emailjs.init('FOglBeof19V01eIHg');
+                        console.log('EmailJS initialized successfully');
+                    } else {
+                        console.warn('EmailJS library not loaded yet, retrying...');
+                        setTimeout(initEmailJS, 500); // Retry after 500ms
+                    }
+                };
+                initEmailJS();
+            }, []);
+
             return (
                 <>
                     <Navbar />
