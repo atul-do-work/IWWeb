@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IndianWorker - Construction & Services</title>
     <link rel="icon" type="image/png" href="assets/Indian.png">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/index.min.js"></script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -952,17 +951,46 @@
         // Main App Component
         function App() {
             useEffect(() => {
-                // Initialize EmailJS when the app loads
-                const initEmailJS = () => {
-                    if (window.emailjs) {
-                        window.emailjs.init('FOglBeof19V01eIHg');
-                        console.log('EmailJS initialized successfully');
-                    } else {
-                        console.warn('EmailJS library not loaded yet, retrying...');
-                        setTimeout(initEmailJS, 500); // Retry after 500ms
-                    }
+                // Load EmailJS dynamically
+                const loadEmailJS = () => {
+                    return new Promise((resolve, reject) => {
+                        if (window.emailjs) {
+                            window.emailjs.init('FOglBeof19V01eIHg');
+                            console.log('✓ EmailJS already loaded and initialized');
+                            resolve();
+                            return;
+                        }
+
+                        const script = document.createElement('script');
+                        script.src = 'https://cdn.emailjs.com/sdk/3.11.0/email.min.js';
+                        script.type = 'text/javascript';
+                        script.async = true;
+
+                        script.onload = () => {
+                            console.log('✓ EmailJS script loaded from CDN');
+                            setTimeout(() => {
+                                if (window.emailjs) {
+                                    window.emailjs.init('FOglBeof19V01eIHg');
+                                    console.log('✓ EmailJS initialized successfully');
+                                    resolve();
+                                } else {
+                                    reject(new Error('EmailJS loaded but not accessible'));
+                                }
+                            }, 100);
+                        };
+
+                        script.onerror = () => {
+                            console.error('✗ Failed to load EmailJS from CDN');
+                            reject(new Error('Failed to load EmailJS library'));
+                        };
+
+                        document.head.appendChild(script);
+                    });
                 };
-                initEmailJS();
+
+                loadEmailJS().catch((error) => {
+                    console.error('EmailJS initialization error:', error);
+                });
             }, []);
 
             return (
