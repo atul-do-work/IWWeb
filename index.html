@@ -269,36 +269,30 @@
                 // Load EmailJS dynamically
                 const loadEmailJS = () => {
                     return new Promise((resolve, reject) => {
+                        // If already loaded
                         if (window.emailjs) {
                             window.emailjs.init('FOglBeof19V01eIHg');
-                            console.log('✓ EmailJS already loaded and initialized');
                             resolve();
                             return;
                         }
 
                         const script = document.createElement('script');
-                        script.src = 'https://cdn.emailjs.com/sdk/3.11.0/email.min.js';
+                        // Updated reliable CDN link
+                        script.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
                         script.type = 'text/javascript';
                         script.async = true;
 
                         script.onload = () => {
-                            console.log('✓ EmailJS script loaded from CDN');
-                            setTimeout(() => {
-                                if (window.emailjs) {
-                                    window.emailjs.init('FOglBeof19V01eIHg');
-                                    console.log('✓ EmailJS initialized successfully');
-                                    resolve();
-                                } else {
-                                    reject(new Error('EmailJS loaded but not accessible'));
-                                }
-                            }, 100);
+                            // The newer SDK might need a tiny beat to attach to window
+                            if (window.emailjs) {
+                                window.emailjs.init('FOglBeof19V01eIHg');
+                                resolve();
+                            } else {
+                                reject(new Error('EmailJS object not found on window'));
+                            }
                         };
 
-                        script.onerror = () => {
-                            console.error('✗ Failed to load EmailJS from CDN');
-                            reject(new Error('Failed to load EmailJS library'));
-                        };
-
+                        script.onerror = () => reject(new Error('Failed to load EmailJS library'));
                         document.head.appendChild(script);
                     });
                 };
