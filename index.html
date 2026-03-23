@@ -825,23 +825,30 @@
                 e.preventDefault();
                 setSending(true);
 
-                emailjs.init('FOglBeof19V01eIHg');
+                // Check if emailjs is loaded
+                if (!window.emailjs) {
+                    alert('Email service is not loaded. Please refresh the page and try again.');
+                    setSending(false);
+                    return;
+                }
+
+                window.emailjs.init('FOglBeof19V01eIHg');
 
                 const templateParams = {
-                    from_name: formData.name,
-                    from_email: formData.email,
-                    phone: formData.phone,
-                    message: formData.message
+                    title: 'New Contact Form Submission',
+                    name: formData.name,
+                    email: formData.email,
+                    message: formData.message + '\n\nPhone: ' + formData.phone
                 };
 
-                emailjs.send('service_lj2lvm9', 'template_atul', templateParams)
+                window.emailjs.send('service_lj2lvm9', 'template_atul', templateParams)
                     .then((response) => {
                         alert('Thank you! Your message has been sent successfully.');
                         setFormData({ name: '', email: '', phone: '', message: '' });
                         setSending(false);
                     })
                     .catch((error) => {
-                        alert('Failed to send message. Please try again or contact us directly.');
+                        alert('Failed to send message. Error: ' + error.text);
                         console.error('EmailJS error:', error);
                         setSending(false);
                     });
