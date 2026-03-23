@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IndianWorker - Construction & Services</title>
     <link rel="icon" type="image/png" href="assets/Indian.png">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/index.min.js"></script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -807,8 +808,10 @@
             const [formData, setFormData] = useState({
                 name: '',
                 email: '',
+                phone: '',
                 message: ''
             });
+            const [sending, setSending] = useState(false);
 
             const handleInputChange = (e) => {
                 const { name, value } = e.target;
@@ -820,8 +823,28 @@
 
             const handleSubmit = (e) => {
                 e.preventDefault();
-                alert('Thank you for your message! We will contact you soon.');
-                setFormData({ name: '', email: '', message: '' });
+                setSending(true);
+
+                emailjs.init('FOglBeof19V01eIHg');
+
+                const templateParams = {
+                    from_name: formData.name,
+                    from_email: formData.email,
+                    phone: formData.phone,
+                    message: formData.message
+                };
+
+                emailjs.send('service_lj2lvm9', 'template_atul', templateParams)
+                    .then((response) => {
+                        alert('Thank you! Your message has been sent successfully.');
+                        setFormData({ name: '', email: '', phone: '', message: '' });
+                        setSending(false);
+                    })
+                    .catch((error) => {
+                        alert('Failed to send message. Please try again or contact us directly.');
+                        console.error('EmailJS error:', error);
+                        setSending(false);
+                    });
             };
 
             return (
@@ -830,7 +853,7 @@
                     <div className="contact-content">
                         <div className="contact-info">
                             <h3>Don't Be Shy</h3>
-                            <p>Feel free to get in touch with me. I am always open to discussing new projects, creative ideas or opportunities to be part of your visions.</p>
+                            <p>Feel free to get in touch with us. We are always open to discussing new projects requirements, Bulk Hiring or opportunities to be part of your visions.</p>
                             <div>
                                 <span>✉️</span>
                                 <div>
@@ -873,6 +896,18 @@
                                 />
                             </div>
                             <div className="form-group">
+                                <label htmlFor="phone">Phone Number</label>
+                                <input
+                                    type="tel"
+                                    id="phone"
+                                    name="phone"
+                                    value={formData.phone}
+                                    onChange={handleInputChange}
+                                    placeholder="Enter your phone number"
+                                    required
+                                />
+                            </div>
+                            <div className="form-group">
                                 <label htmlFor="message">Message</label>
                                 <textarea
                                     id="message"
@@ -883,7 +918,9 @@
                                     required
                                 ></textarea>
                             </div>
-                            <button type="submit" className="submit-btn">Submit</button>
+                            <button type="submit" className="submit-btn" disabled={sending}>
+                                {sending ? 'Sending...' : 'Submit'}
+                            </button>
                         </form>
                     </div>
                 </section>
@@ -902,7 +939,7 @@
                         <a href="#" onClick={(e) => { e.preventDefault(); alert('Instagram coming soon!'); }}>📷</a>
                         <a href="#" onClick={(e) => { e.preventDefault(); alert('LinkedIn coming soon!'); }}>in</a>
                     </div>
-                    <p>&copy; 2024 IndianWorker. All rights reserved.</p>
+                    <p>&copy; 2025 IndianWorker. All rights reserved.</p>
                 </footer>
             );
         }
