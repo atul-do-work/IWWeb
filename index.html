@@ -9,6 +9,12 @@
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Vercel Analytics -->
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
 </head>
 <body>
     <div id="root"></div>
@@ -252,12 +258,7 @@
                 <footer>
                     <h3>IndianWorker</h3>
                     <p>काम भी, कमाई भी, सम्मान भी,</p>
-                    <div className="social-links">
-                        <a href="#" onClick={(e) => { e.preventDefault(); alert('Facebook coming soon!'); }}>f</a>
-                        <a href="#" onClick={(e) => { e.preventDefault(); alert('Twitter coming soon!'); }}>𝕏</a>
-                        <a href="#" onClick={(e) => { e.preventDefault(); alert('Instagram coming soon!'); }}>📷</a>
-                        <a href="#" onClick={(e) => { e.preventDefault(); alert('LinkedIn coming soon!'); }}>in</a>
-                    </div>
+                    
                     <p>&copy; 2025 IndianWorker. All rights reserved.</p>
                 </footer>
             );
