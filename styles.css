@@ -5,9 +5,14 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Noto Sans Devanagari', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #333;
     background-color: #f9f9f9;
+}
+
+.hero-subtext,
+footer p {
+    font-family: 'Noto Sans Devanagari', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Header/Navbar Styles */
@@ -101,22 +106,73 @@ nav button:hover {
     background-repeat: no-repeat;
 }
 
-.hero-text {
-    text-align: center;
+.hero-section {
+    width: 100%;
+    height: 85vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     color: white;
-    font-size: 48px;
-    font-weight: bold;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.65);
+    z-index: 2;
+}
+
+.hero-content {
     position: relative;
     z-index: 10;
+    text-align: left;
+    max-width: 900px;
+    margin: 80px 20px 0 20px;
+}
+
+.hero-heading {
+    margin-top: 0;
+}
+
+.hero-heading {
+    margin: 0 0 18px 0;
+    font-size: clamp(42px, 7vw, 92px);
+    line-height: 1.05;
+    font-weight: 900;
+    color: #ffffff;
+    text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.5);
+}
+
+.hero-tagline {
+    font-size: clamp(16px, 2vw, 24px);
+    color: #ccc;
+    margin-bottom: 16px;
+    max-width: 800px;
 }
 
 .hero-subtext {
-    color: white;
-    font-size: 18px;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
-    position: relative;
-    z-index: 10;
+    color: #ffd700;
+    font-size: clamp(18px, 2vw, 24px);
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 1px;
+}
+
+.hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
 }
 
 .hero-image {
@@ -446,72 +502,153 @@ nav button:hover {
 .contact-form {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 15px;
+    background-color: rgba(255,255,255,0.03);
+    padding: 24px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.15);
 }
 
 .form-group {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 6px;
 }
 
 .form-group label {
-    font-weight: 600;
-    font-size: 12px;
+    font-size: 13px;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
-    display: none;
+    color: #f7f7f7;
+    display: block;
 }
 
 .form-group input,
+.form-group select,
 .form-group textarea {
     padding: 14px;
-    border: 2px solid #555;
-    border-radius: 0;
+    border: 1px solid #444;
+    border-radius: 8px;
     font-family: inherit;
-    font-size: 14px;
-    background: transparent;
+    font-size: 15px;
+    background: rgba(255,255,255,0.06);
     color: white;
     transition: all 0.3s ease;
 }
 
 .form-group input::placeholder,
 .form-group textarea::placeholder {
-    color: #999;
+    color: #bdbdbd;
 }
 
 .form-group input:focus,
+.form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: white;
-    background: transparent;
-    box-shadow: none;
+    border-color: #ffd700;
+    background: rgba(255,255,255,0.12);
+    box-shadow: 0 0 0 4px rgba(255,215,0,0.12);
 }
 
 .form-group textarea {
     resize: vertical;
-    min-height: 130px;
+    min-height: 140px;
+    max-height: 250px;
+}
+
+.form-group select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath fill='%23fff' d='M0 0l5 6 5-6z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 10px 6px;
+    color: white;
+}
+
+.form-group select option {
+    color: #1a1a1a;
+    background-color: white;
 }
 
 .submit-btn {
     background-color: #ffd700;
-    color: black;
-    padding: 14px;
+    color: #1a1a1a;
+    padding: 14px 20px;
     border: none;
-    border-radius: 0;
+    border-radius: 8px;
     cursor: pointer;
-    font-weight: 700;
-    font-size: 14px;
-    transition: all 0.3s ease;
-    text-transform: uppercase;
+    font-weight: 800;
+    font-size: 15px;
     letter-spacing: 1px;
-    margin-top: 10px;
+    transition: all 0.3s ease;
 }
 
 .submit-btn:hover {
-    background-color: #ffed4e;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(255, 215, 0, 0.3);
+    background-color: #ffde45;
+    transform: translateY(-1px);
+    box-shadow: 0 12px 20px rgba(0,0,0,0.2);
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #1a1a1a;
+    border: 2px solid #ffd700;
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    color: white;
+}
+
+.modal-content h3 {
+    color: #ffd700;
+    margin-bottom: 15px;
+    font-size: 24px;
+}
+
+.modal-content p {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.modal-close-btn {
+    background-color: #ffd700;
+    color: #1a1a1a;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background-color 0.3s ease;
+}
+
+.modal-close-btn:hover {
+    background-color: #ffde45;
+}
+
+/* Error Styles */
+.error {
+    color: #ff6b6b;
+    font-size: 12px;
+    margin-top: 4px;
+    display: block;
 }
 
 /* Footer */
@@ -552,6 +689,120 @@ footer p {
 
 .social-links a:hover {
     color: white;
+}
+
+/* Ecosystem Section */
+.ecosystem-section {
+    padding: 80px 40px;
+    background-color: #1a1a1a;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.ecosystem-section::before {
+    content: 'ECOSYSTEM';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 200px;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.05);
+    white-space: nowrap;
+    z-index: 1;
+}
+
+.ecosystem-header {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    margin-bottom: 80px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ecosystem-label {
+    color: #ffd700;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.ecosystem-title {
+    font-size: 56px;
+    font-weight: 800;
+    color: white;
+    margin: 0;
+    letter-spacing: -1px;
+}
+
+.ecosystem-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    position: relative;
+    z-index: 2;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.ecosystem-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    padding: 50px 35px 40px;
+    position: relative;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.ecosystem-card:hover {
+    border-color: #ffd700;
+    background: rgba(255, 215, 0, 0.08);
+    transform: translateY(-10px);
+}
+
+.card-number {
+    font-size: 72px;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.1);
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    line-height: 1;
+}
+
+.ecosystem-card h3 {
+    font-size: 22px;
+    font-weight: 800;
+    color: white;
+    margin: 0 0 20px 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-align: left;
+}
+
+.ecosystem-card p {
+    font-size: 16px;
+    color: #ccc;
+    line-height: 1.8;
+    margin: 0 0 30px 0;
+    text-align: left;
+}
+
+.card-tag {
+    font-size: 12px;
+    font-weight: 700;
+    color: #ffd700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 8px 16px;
+    border: 1px solid #ffd700;
+    background: rgba(255, 215, 0, 0.1);
 }
 
 /* Responsive Design */
@@ -674,6 +925,39 @@ footer p {
 
     .contact-info h3 {
         font-size: 20px;
+    }
+
+    .ecosystem-section {
+        padding: 50px 20px;
+    }
+
+    .ecosystem-section::before {
+        font-size: 100px;
+    }
+
+    .ecosystem-header {
+        margin-bottom: 50px;
+    }
+
+    .ecosystem-title {
+        font-size: 32px;
+    }
+
+    .ecosystem-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .ecosystem-card {
+        padding: 40px 25px 35px;
+    }
+
+    .card-number {
+        font-size: 48px;
+    }
+
+    .ecosystem-card h3 {
+        font-size: 18px;
     }
 
     .services-section,
