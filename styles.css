@@ -143,23 +143,23 @@ nav button:hover {
 
 .hero-heading {
     margin: 0 0 18px 0;
-    font-size: clamp(42px, 7vw, 92px);
+    font-size: clamp(46px, 10vw, 100px);
     line-height: 1.05;
     font-weight: 900;
     color: #ffffff;
-    text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.6);
 }
 
 .hero-tagline {
-    font-size: clamp(16px, 2vw, 24px);
-    color: #ccc;
+    font-size: clamp(18px, 3vw, 28px);
+    color: #eee;
     margin-bottom: 16px;
     max-width: 800px;
 }
 
 .hero-subtext {
     color: #ffd700;
-    font-size: clamp(18px, 2vw, 24px);
+    font-size: clamp(20px, 3.5vw, 28px);
     font-weight: 700;
     margin: 0;
     letter-spacing: 1px;
@@ -904,6 +904,15 @@ footer p {
 
     .services-grid {
         grid-template-columns: 1fr;
+    }
+
+    .ecosystem-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .ecosystem-card {
+        padding: 30px 20px;
     }
 
     .contact-section {
