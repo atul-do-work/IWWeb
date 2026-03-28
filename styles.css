@@ -689,7 +689,7 @@ footer p {
 
     .floating-actions {
         position: fixed;
-        right: 18px;
+        right: 16px;
         bottom: 80px;
         display: flex;
         flex-direction: column;
@@ -732,7 +732,7 @@ footer p {
 
     @media (max-width: 600px) {
         .floating-actions {
-            right: 12px;
+            right: 16px;
             bottom: 68px;
             gap: 10px;
         }
@@ -742,6 +742,20 @@ footer p {
             height: 44px;
             font-size: 20px;
         }
+    }
+
+    html {
+        scrollbar-width: none;
+    }
+
+    body::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+
+    * {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
     }
 
 .social-links a {
