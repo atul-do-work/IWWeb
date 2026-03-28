@@ -687,12 +687,62 @@ footer p {
     color: #ffde45;
 }
 
-.social-links {
-    display: flex;
-    gap: 15px;
-    margin: 0;
-    font-size: 18px;
-}
+    .floating-actions {
+        position: fixed;
+        right: 18px;
+        bottom: 80px;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        z-index: 999;
+    }
+
+    .floating-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        color: white;
+        text-decoration: none;
+        box-shadow: 0 16px 30px rgba(0, 0, 0, 0.18);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        font-size: 22px;
+    }
+
+    .floating-btn i {
+        font-size: 24px;
+        line-height: 1;
+    }
+
+    .floating-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 20px 28px rgba(0, 0, 0, 0.24);
+    }
+
+    .whatsapp-btn {
+        background-color: #25d366;
+    }
+
+    .call-btn {
+        background-color: #ffd700;
+        color: #1a1a1a;
+    }
+
+    @media (max-width: 600px) {
+        .floating-actions {
+            right: 12px;
+            bottom: 68px;
+            gap: 10px;
+        }
+
+        .floating-btn {
+            width: 44px;
+            height: 44px;
+            font-size: 20px;
+        }
+    }
 
 .social-links a {
     color: #ff6b35;

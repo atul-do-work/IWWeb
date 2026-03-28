@@ -6,6 +6,7 @@
     <title>IndianWorker - Construction & Services</title>
     <link rel="icon" type="image/png" href="assets/Indian.png">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -372,6 +373,24 @@
             );
         }
 
+        // Floating Action Buttons
+        function FloatingActions() {
+            const whatsappNumber = '919579047919';
+            const whatsappLink = `https://wa.me/${whatsappNumber}?text=Hello%20IndianWorker%2C%20I%20need%20help%20with%20worker%20hiring`;
+            const phoneNumber = '+919579047919';
+
+            return (
+                <div className="floating-actions">
+                    <a href={whatsappLink} className="floating-btn whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+                        <i className="fab fa-whatsapp" aria-hidden="true"></i>
+                    </a>
+                    <a href={`tel:${phoneNumber}`} className="floating-btn call-btn" aria-label="Call">
+                        <i className="fas fa-phone" aria-hidden="true"></i>
+                    </a>
+                </div>
+            );
+        }
+
         // Footer Component
         function Footer() {
             return (
@@ -437,6 +456,7 @@
                     <About />
                     <Contact />
                     <Footer />
+                    <FloatingActions />
                 </>
             );
         }
