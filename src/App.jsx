@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function Navbar() {
   const [activeSection, setActiveSection] = useState('home');
