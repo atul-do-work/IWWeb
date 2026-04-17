@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-function Navbar() {
+function Navbar({ onPlayStoreClick }) {
   const [activeSection, setActiveSection] = useState('home');
 
   const scrollToSection = (id) => {
@@ -28,7 +28,7 @@ function Navbar() {
         <button onClick={() => scrollToSection('about')}>About</button>
       </nav>
 
-      <button className="play-store-btn" onClick={() => alert('Download from Play Store coming soon!')}>
+      <button className="play-store-btn" onClick={onPlayStoreClick}>
         <img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" />
       </button>
     </header>
@@ -162,15 +162,41 @@ function Contact() {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+    let newValue = value;
+
+    if (name === 'phone') {
+      newValue = value.replace(/\D/g, '').slice(0, 10);
+    }
+
     setFormData({
       ...formData,
-      [name]: value
+      [name]: newValue
     });
     if (errors[name]) {
       setErrors({
         ...errors,
         [name]: ''
       });
+    }
+  };
+
+  const handlePhoneKeyDown = (e) => {
+    const allowedKeys = [
+      'Backspace',
+      'Delete',
+      'ArrowLeft',
+      'ArrowRight',
+      'Tab',
+      'Home',
+      'End'
+    ];
+
+    if (allowedKeys.includes(e.key)) {
+      return;
+    }
+
+    if (/\d/.test(e.key) && formData.phone.length >= 10) {
+      e.preventDefault();
     }
   };
 
@@ -186,8 +212,8 @@ function Contact() {
     }
     if (!formData.phone.trim()) {
       newErrors.phone = 'Phone number is required';
-    } else if (!/^\d{10,}$/.test(formData.phone.replace(/\D/g, ''))) {
-      newErrors.phone = 'Please enter a valid phone number (at least 10 digits)';
+    } else if (!/^\d{10}$/.test(formData.phone)) {
+      newErrors.phone = 'Please enter a valid 10-digit phone number';
     }
     if (!formData.message.trim()) {
       newErrors.message = 'Message is required';
@@ -309,7 +335,11 @@ function Contact() {
                 name="phone"
                 value={formData.phone}
                 onChange={handleInputChange}
+                onKeyDown={handlePhoneKeyDown}
                 placeholder="Enter your phone number"
+                maxLength={10}
+                pattern="\d{10}"
+                title="Enter exactly 10 digits"
                 required
               />
               {errors.phone && <span className="error">{errors.phone}</span>}
@@ -380,6 +410,8 @@ function Footer() {
 }
 
 function App() {
+  const [showPlayStoreModal, setShowPlayStoreModal] = useState(false);
+
   useEffect(() => {
     const loadEmailJS = () => {
       return new Promise((resolve, reject) => {
@@ -413,9 +445,12 @@ function App() {
     });
   }, []);
 
+  const openPlayStoreModal = () => setShowPlayStoreModal(true);
+  const closePlayStoreModal = () => setShowPlayStoreModal(false);
+
   return (
     <>
-      <Navbar />
+      <Navbar onPlayStoreClick={openPlayStoreModal} />
       <Hero />
       <Services />
       <Ecosystem />
@@ -423,6 +458,16 @@ function App() {
       <Contact />
       <Footer />
       <FloatingActions />
+
+      {showPlayStoreModal && (
+        <div className="modal-overlay" onClick={closePlayStoreModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h3>Download Coming Soon</h3>
+            <p>Our app is not yet available on the Play Store. We will notify you once it is live.</p>
+            <button className="modal-close-btn" onClick={closePlayStoreModal}>Close</button>
+          </div>
+        </div>
+      )}
     </>
   );
 }
