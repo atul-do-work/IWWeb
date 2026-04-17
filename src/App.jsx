@@ -99,8 +99,8 @@ function Ecosystem() {
   return (
     <section className="ecosystem-section" id="ecosystem">
       <div className="ecosystem-header">
-        <p className="ecosystem-label">THE ECOSYSTEM</p>
-        <h2 className="ecosystem-title">Frictionless Deployment.</h2>
+        <p className="ecosystem-label">THE PLATFORM</p>
+        <h2 className="ecosystem-title">Hire Fast. Work Instantly.</h2>
       </div>
 
       <div className="ecosystem-grid">
@@ -125,14 +125,11 @@ function About() {
         <div className="about-text">
           <h2>Why Choose IndianWorker?</h2>
           <p>
-            IndianWorker is India's leading platform connecting skilled workers with customers seeking reliable construction, industrial, and home services.
-          </p>
+            IndianWorker connects skilled workers with customers who need reliable construction, industrial, and home services—quickly and efficiently.          </p>
           <p>
-            With thousands of verified professionals, we ensure quality workmanship, transparent pricing, and customer satisfaction on every project.
-          </p>
+            With a network of verified professionals, we ensure quality work, fair pricing, and dependable service every time.          </p>
           <p>
-            Our mission is to make professional services accessible and affordable to everyone, while empowering skilled workers to grow their businesses.
-          </p>
+            Our mission is simple: make skilled services easy to access and affordable for everyone, while helping workers find more opportunities and grow their income.          </p>
           <div className="about-benefits">
             <div className="benefit-item">Verified Professionals</div>
             <div className="benefit-item">Transparent Pricing</div>
